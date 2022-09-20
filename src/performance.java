@@ -1,5 +1,8 @@
 public class performance {
 
+    static final int TRAGEDYMOUNT = 40000;
+    static final int COMEDYMOUNT = 30000;
+
     private Player player;
     private int audience;
 
@@ -32,23 +35,23 @@ public class performance {
     public int calThisAmount() throws Exception{
         int thisAmount = 0;
 
-        int tragedymount = 1000 + 500 * (audience - 30);
-        int comedymount = 10000 + 500 * (audience - 20);
-        int addcomedymount = 300 * audience;
+        int tragedymountadd = 1000 + 500 * (audience - 30);
+        int comedymountadd = 10000 + 500 * (audience - 20);
+        int addcomedymountadd = 300 * audience;
 
         switch(player.getType()) {
             case "tragedy":
-                thisAmount = 40000;
+                thisAmount = TRAGEDYMOUNT;
                 if (audience > 30) {
-                    thisAmount += tragedymount;
+                    thisAmount += tragedymountadd;
                 }
                 break;
             case "comedy":
-                thisAmount = 30000;
+                thisAmount = COMEDYMOUNT;
                 if (audience > 20) {
-                    thisAmount += comedymount;
+                    thisAmount += comedymountadd;
                 }
-                thisAmount += addcomedymount;
+                thisAmount += addcomedymountadd;
                 break;
             default:
                 throw new Exception("Exception message");
