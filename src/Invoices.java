@@ -36,4 +36,8 @@ public class Invoices {
     public ArrayList<performance> getPerformances() {
         return performances;
     }
+
+    public String StatementBill() {
+        return "statement for " + customer.getName() + "\n";
+    }
 }

@@ -33,4 +33,12 @@ public class Player {
     public void setPlayID(String playID) {
         this.playID = playID;
     }
+
+    public int calAmount(performance perf) {
+        return 0;
+    }
+
+    public int calVolumCredits(performance perf) {
+        return 0;
+    }
 }

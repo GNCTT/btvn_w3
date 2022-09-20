@@ -1,7 +1,7 @@
 public class performance {
 
-    static final int TRAGEDYMOUNT = 40000;
-    static final int COMEDYMOUNT = 30000;
+    static final int AUDIENCETRAGEDY = 30;
+    static final int AUDIENCECOMEDY = 20;
 
     private Player player;
     private int audience;
@@ -14,6 +14,8 @@ public class performance {
         player.setPlayID(playID);
         this.audience = audience;
     }
+
+
 
     public performance(Player player, int audience) {
         this.player = player;
@@ -32,39 +34,32 @@ public class performance {
         this.player = player;
     }
 
-    public int calThisAmount() throws Exception{
-        int thisAmount = 0;
-
-        int tragedymountadd = 1000 + 500 * (audience - 30);
-        int comedymountadd = 10000 + 500 * (audience - 20);
-        int addcomedymountadd = 300 * audience;
-
-        switch(player.getType()) {
-            case "tragedy":
-                thisAmount = TRAGEDYMOUNT;
-                if (audience > 30) {
-                    thisAmount += tragedymountadd;
-                }
-                break;
-            case "comedy":
-                thisAmount = COMEDYMOUNT;
-                if (audience > 20) {
-                    thisAmount += comedymountadd;
-                }
-                thisAmount += addcomedymountadd;
-                break;
-            default:
-                throw new Exception("Exception message");
+    public int getTragedyMountAdd() {
+        if (audience > AUDIENCETRAGEDY) {
+            return 1000 + 500 * (audience - AUDIENCETRAGEDY);
         }
-        return thisAmount;
+        return 0;
     }
 
-    public int calVolumCredits() {
-        int result = Math.max(audience - 30, 0);
-        if ("comedy".equals(player.getType())) {
-            result += Math.floor(audience / 5);
+    public int getComedyMountAdd() {
+        int result = 0;
+        if (audience > AUDIENCECOMEDY) {
+            result += 10000 + 500 * (audience - 20);
         }
+        result += getAddComedyMountAdd();
         return result;
+    }
+
+    public int getAddComedyMountAdd() {
+        return 300 * audience;
+    }
+
+    public int getMaxaudience() {
+        return Math.max(audience - AUDIENCETRAGEDY, 0);
+    }
+
+    public int getFloorAudience() {
+        return (int) Math.floor(audience / 5);
     }
 
     public String getBill(int thisAmount) {
