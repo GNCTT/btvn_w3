@@ -58,13 +58,16 @@ public class Solution {
             JSONObject jsonObject = (JSONObject) obj;
 
             // đọc hamlet
-            String a; int i=1;
+            String a = null,b=null; int i=1;
             Map hamlet = ((Map) jsonObject.get("hamlet"));
             // đọc hamlet Map
             Iterator<Map.Entry> itr1 = hamlet.entrySet().iterator();
             while (itr1.hasNext()) {
                 Map.Entry pair = itr1.next();
-                System.out.println(pair.getKey() + " : " + pair.getValue());
+                if(i==1) {a = (String) pair.getValue();i++;}
+                if(i==2) {b = (String) pair.getValue();i=1;}
+                plays.put("hamlet", new Player(a, b));
+                a=null;b=null;
             }
 
             // đọc aslike
@@ -73,7 +76,10 @@ public class Solution {
             Iterator<Map.Entry> itr2 = Aslike.entrySet().iterator();
             while (itr2.hasNext()) {
                 Map.Entry pair = itr2.next();
-                System.out.println(pair.getKey() + " : " + pair.getValue());
+                if(i==1) {a = (String) pair.getValue();i++;}
+                if(i==2) {b = (String) pair.getValue();i=1;}
+                plays.put("as-like", new Player(a, b));
+                a=null;b=null;
             }
 
             // đọc othello
@@ -82,7 +88,10 @@ public class Solution {
             Iterator<Map.Entry> itr3 = othello.entrySet().iterator();
             while (itr3.hasNext()) {
                 Map.Entry pair = itr3.next();
-                System.out.println(pair.getKey() + " : " + pair.getValue());
+                if(i==1) {a = (String) pair.getValue();i++;}
+                if(i==2) {b = (String) pair.getValue();i=1;}
+                plays.put("othello", new Player(a, b));
+                a=null;b=null;
             }
 
         } catch (FileNotFoundException e) {
@@ -93,11 +102,10 @@ public class Solution {
             e.printStackTrace();
         }
 
-        plays.put("hamlet", new Player("Hamlet", "tragedy"));
-        plays.put("as-like", new Player("As You Like It", "comedy"));
-        plays.put("othello", new Player("Othello", "tragedy"));
+
+       
         try {
-            //System.out.println(statement(invoice, plays));
+            System.out.println(statement(invoice, plays));
 
         } catch (Exception e) {
             e.printStackTrace();
